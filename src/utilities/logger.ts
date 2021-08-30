@@ -29,6 +29,7 @@ const defaultTransport  = () => {
         ]
     } else {
         transport = [
+            new transports.File({ level: 'info', filename: 'logs/info.log' }),
             new transports.File({ level: 'warn', filename: 'logs/warn.log' }),
             new transports.File({ level: 'error', filename: 'logs/error.log' }),
             new transports.File({ filename: 'logs/combined.log' }),
