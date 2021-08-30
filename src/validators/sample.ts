@@ -3,7 +3,7 @@ import Joi from 'joi';
 const createSchema = Joi.object({
     id: Joi.string().min(1).max(Number.MAX_SAFE_INTEGER),
     param: Joi.string().required(),
-    justValue: Joi.number()
+    justValue: Joi.number(),
 });
 
 const editSchema = Joi.object({
@@ -11,4 +11,4 @@ const editSchema = Joi.object({
     param: Joi.string(),
 });
 
-export = { createSchema, editSchema }
+export = { createSchema, editSchema };

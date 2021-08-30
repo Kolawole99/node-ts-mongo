@@ -1,22 +1,22 @@
-import { Request } from "express"
+import { Request } from 'express';
 
-export interface processResponseRequest extends Request {
+export interface ProcessResponseRequest extends Request {
     payload: {
-        payload: {} | string,
-        error: null,
-        responseType?: string,
-        sendRawResponse?: boolean,
-        status: number
-    }
+        payload: Record<string, unknown> | string;
+        error: null;
+        responseType?: string;
+        sendRawResponse?: boolean;
+        status: number;
+    };
 }
 
-export interface errorParameterInterface {
-    payload: null,
-    error: {} | string,
-    message?: {} | string,
-    status: number
+export interface ErrorParameterInterface {
+    payload: null;
+    error: Record<string, unknown> | string;
+    message?: Record<string, unknown> | string;
+    status: number;
 }
 
-export interface routerRequest extends Request {
-    payload: {}
+export interface RouterRequest extends Request {
+    payload: Record<string, unknown>;
 }
