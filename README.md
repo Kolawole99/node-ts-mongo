@@ -17,5 +17,3 @@ This is a flexible, and generic Node.js, Express app template which covers the m
 ## LICENSE
 
 ISC - [https://www.isc.org/licenses/]
-
-Read article on Mongoose commands [https://arunrajeevan.medium.com/understanding-mongoose-connection-options-2b6e73d96de1]

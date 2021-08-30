@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
 import { handle404, handleError, setupRequest, processResponse } from '../middlewares/http';
-// import sampleRouteHandler from './sample';
+import sampleRouteHandler from './sample';
 
 router.use(setupRequest);
-// router.use('/samples', sampleRouteHandler);
+router.use('/samples', sampleRouteHandler);
 router.use(processResponse);
 
 router.use('/image/:imageName', () => {});
