@@ -25,6 +25,7 @@ const defaultTransport  = () => {
     if (NODE_ENV === 'DEVELOPMENT') {
         transport = [
             new transports.Console({ level: 'error' }),
+            new transports.File({ level: 'error', filename: 'logs/error.log' }),
             new transports.File({ filename: 'logs/combined.log' }),
         ]
     } else {
