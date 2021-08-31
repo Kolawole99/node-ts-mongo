@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 export interface ProcessResponseRequest extends Request {
     payload: {
-        payload: Record<string, unknown> | string;
+        payload: Record<string, unknown>;
         error: null;
         responseType?: string;
         sendRawResponse?: boolean;
@@ -12,8 +12,8 @@ export interface ProcessResponseRequest extends Request {
 
 export interface ErrorParameterInterface {
     payload: null;
-    error: Record<string, unknown> | string;
-    message?: Record<string, unknown> | string;
+    error: Record<string, unknown>;
+    message?: Record<string, unknown>;
     status: number;
 }
 
