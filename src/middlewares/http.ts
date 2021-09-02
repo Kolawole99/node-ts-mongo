@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ErrorParameterInterface } from '../datatypes/customIntegrations';
+import { MiddlewareErrorParameterInterface } from '../datatypes/customIntegrations';
 import { Logger } from '../utilities/logger';
 
 export function setupRequest(request: Request, response: Response, next: NextFunction): void {
@@ -34,7 +34,7 @@ export function handle404(request: Request, response: Response, next: NextFuncti
 }
 
 export function handleError(
-    error: ErrorParameterInterface,
+    error: MiddlewareErrorParameterInterface,
     request: Request,
     response: Response,
 ): Response {
