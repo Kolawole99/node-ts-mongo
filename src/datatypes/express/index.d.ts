@@ -3,6 +3,6 @@ declare namespace Express {
     type ServiceFailedResponse = import('../customIntegrations').ServiceFailedResponse;
 
     export interface Request {
-        payload: ServiceSuccessfulResponse | ServiceFailedResponse;
+        payload: ServiceSuccessfulResponse | ServiceFailedResponse | void;
     }
 }
