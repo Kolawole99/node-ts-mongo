@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ProcessResponseRequest, ErrorParameterInterface } from '../datatypes/customIntegrations';
+import { ErrorParameterInterface } from '../datatypes/customIntegrations';
 import { Logger } from '../utilities/logger';
 
 export function setupRequest(request: Request, response: Response, next: NextFunction): void {
@@ -15,7 +15,7 @@ export function setupRequest(request: Request, response: Response, next: NextFun
 }
 
 export function processResponse(
-    request: ProcessResponseRequest,
+    request: Request,
     response: Response,
     next: NextFunction,
 ): void | Response {
