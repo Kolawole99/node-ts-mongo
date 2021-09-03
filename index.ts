@@ -33,7 +33,7 @@ app.use('/', appRouteHandler);
 const PORT: number = parseInt(<string>APP_PORT, 10);
 app.listen(PORT, () => {
     if (NODE_ENV === 'DEVELOPMENT') {
-        console.log(`👍 Development Server is running at http://localhost:${PORT}`);
+        console.log(`🔥 Development Server is running at http://localhost:${PORT} 👍`);
     } else {
         console.log(`😃 We are LIVE on port ${PORT}. 👍`);
     }

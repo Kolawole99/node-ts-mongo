@@ -2,6 +2,10 @@
 
 This is a flexible, and generic Node.js, Express app template which covers the most basic to advance needs of modern REST APIS and is written in TypeScript.
 
+If you need a definitive introduction to Javascript features and a cheat sheet [https://websitesetup.org/javascript-cheat-sheet/].
+
+If you need a definitive introduction to Typescript features [https://www.sitepen.com/blog/update-the-definitive-typescript-guide] and a cheat sheet [https://www.sitepen.com/blog/typescript-cheat-sheet].
+
 ---
 
 ## CONFIGURATION
