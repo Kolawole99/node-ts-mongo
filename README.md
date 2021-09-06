@@ -13,12 +13,14 @@ If you need a definitive introduction to Typescript features [https://www.sitepe
 1. Ensure you have NodeJS version v14.17.5 installed. Verify with `node --version` command.
 2. Run the command `npm install -g ts-node` to install ts-node globally.
 3. Install template dependencies.
-    ***npm install**
+    `npm install`
 4. Create the following environment variables:
-    ***NODE_ENV**: Specifies the app working environment
-    ***PORT**: Sets a default app port.
-    ***DB_URI**: Sets MongoDB connection String
-    ***NAME**: Sets the App Name
+    `NODE_ENV`: Specifies the app working environment
+    `PORT`: Sets a default app port.
+    `DB_URI`: Sets MongoDB connection String
+    `NAME`: Sets the App Name
+
+---
 
 ## LICENSE
 
