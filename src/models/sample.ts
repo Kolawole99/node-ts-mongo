@@ -1,6 +1,15 @@
 import { model, Schema } from 'mongoose';
 
-const SampleSchema = new Schema({
+interface Sample {
+    id: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    timeStamp: number;
+    createdOn: Date;
+    updatedOn: Date;
+}
+
+const SampleSchema = new Schema<Sample>({
     id: {
         type: Number,
         required: true,
@@ -36,4 +45,4 @@ const SampleSchema = new Schema({
     },
 });
 
-model('Sample', SampleSchema);
+model<Sample>('Sample', SampleSchema);
