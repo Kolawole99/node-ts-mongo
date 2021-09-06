@@ -33,7 +33,6 @@ const defaultTransport = () => {
         ];
     } else {
         transport = [
-            new transports.File({ level: 'info', filename: 'logs/info.log' }),
             new transports.File({ level: 'warn', filename: 'logs/warn.log' }),
             new transports.File({ level: 'error', filename: 'logs/error.log' }),
             new transports.File({ filename: 'logs/combined.log' }),
@@ -45,7 +44,9 @@ const defaultTransport = () => {
 const logFormat = format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
     format.colorize({ all: true }),
-    format.printf((info) => `[${info.timestamp} : ${info.label}] - ${info.message}`),
+    format.printf(
+        (info) => `[${info.timestamp as string} : ${info.label as string}] - ${info.message}`,
+    ),
 );
 
 const levels: { error: number; warn: number; info: number; http: number; debug: number } = {

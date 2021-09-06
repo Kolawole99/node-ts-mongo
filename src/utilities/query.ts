@@ -1,28 +1,28 @@
-export const determinePagination = (page: number, population: number) => ({
+import { QueryBuildQueryResponse } from '../datatypes/customIntegrations';
+
+export const buildSortOrderString = (value: string): string => value.replace(/,/gi, ' ');
+
+export const buildReturnFieldsString = (value: string): string => value.replace(/,/gi, ' ');
+
+export const determinePagination = (
+    page: number,
+    population: number,
+): { limit: number; skip: number } => ({
     limit: Number(population),
     skip: page * population,
 });
 
-export const buildReturnFieldsString = (value: string) => value.replace(/,/gi, ' ');
-
-export const buildSortOrderString = (value: string) => value.replace(/,/gi, ' ');
-
-export const buildInQuery = (value: string) => {
+export const buildInQuery = (value: string): { $in: Array<unknown> } => {
     const values = value.split(':');
     return { $in: [...values] };
 };
 
-export const buildNorQuery = (value: string) => {
+export const buildNorQuery = (value: string): { $nin: Array<unknown> } => {
     const values = value.split('!');
     return { $nin: [...values.slice(1)] };
 };
 
-export const buildOrQuery = (value: string) => {
-    const values = value.split(',');
-    return { $in: [...values] };
-};
-
-export const buildRangeQuery = (value: string) => {
+export const buildRangeQuery = (value: string): { $gte: number; $lte: number } => {
     const values = value.split('~');
     return {
         $gte: values[0] ? Number(values[0]) : Number.MIN_SAFE_INTEGER,
@@ -30,43 +30,45 @@ export const buildRangeQuery = (value: string) => {
     };
 };
 
-export const buildWildcardOptions = (keyList: string, value: string) => {
-    const keys = keyList.split(',');
-    return {
-        $or: keys.map((key) => ({
-            [key]: {
-                $regex: `${value}`,
-                $options: 'i',
-            },
-        })),
-    };
+export const buildOrQuery = (value: string): { $in: Array<unknown> } => {
+    const values = value.split(',');
+    return { $in: [...values] };
 };
 
-export const buildQuery = (options: any) => {
-    let seekConditions: any;
-    const sortCondition = options.sortBy ? buildSortOrderString(options.sortBy) : '';
-    const fieldsToReturn = options.returnOnly ? buildReturnFieldsString(options.returnOnly) : '';
-    const count = options.count || false;
+export const buildQuery = (options: Record<string, unknown>): QueryBuildQueryResponse => {
+    const sortCondition = options.sortBy ? buildSortOrderString(options.sortBy as string) : '';
+    const fieldsToReturn = options.returnOnly
+        ? buildReturnFieldsString(options.returnOnly as string)
+        : '';
+    const allowedToCount: boolean = (options.count as boolean) || false;
 
     let skip = 0;
     let limit = Number.MAX_SAFE_INTEGER;
 
-    if (options.page >= 0 && options.population) {
-        const pagination = determinePagination(options.page, options.population);
+    if ((options.page as number) >= 0 && options.population) {
+        const pagination = determinePagination(
+            options.page as number,
+            options.population as number,
+        );
         limit = pagination.limit;
         skip = pagination.skip;
     }
 
     /** Delete sort and return fields */
-    delete options.count;
-    delete options.page;
-    delete options.population;
-    delete options.returnOnly;
-    delete options.sortBy;
+    const { count, page, population, returnOnly, sortBy, ...remainingQueryItems } = options;
 
-    Object.keys(options).forEach((field) => {
-        const hasProperty = Object.prototype.hasOwnProperty.call(options, field);
-        const fieldValue = hasProperty === true ? options[field].toLowerCase() : '';
+    const seekConditions: Record<string, unknown> = {};
+    Object.keys(remainingQueryItems).forEach((field) => {
+        const hasProperty: boolean = Object.prototype.hasOwnProperty.call(
+            remainingQueryItems,
+            field,
+        );
+
+        const fieldValue =
+            hasProperty === true
+                ? (remainingQueryItems[field as keyof typeof remainingQueryItems] as string)
+                : '';
+        fieldValue.toLowerCase();
 
         if (fieldValue !== '') {
             let condition;
@@ -85,11 +87,23 @@ export const buildQuery = (options: any) => {
     });
 
     return {
-        count,
+        count: allowedToCount,
         fieldsToReturn,
         limit,
         seekConditions,
         skip,
         sortCondition,
+    };
+};
+
+export const buildWildcardOptions = (keyList: string, value: string): { $or: unknown } => {
+    const keys = keyList.split(',');
+    return {
+        $or: keys.map((key) => ({
+            [key]: {
+                $regex: `${value}`,
+                $options: 'i',
+            },
+        })),
     };
 };
