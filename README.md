@@ -16,7 +16,9 @@ If you need a definitive introduction to Typescript features [https://www.sitepe
     ***npm install**
 4. Create the following environment variables:
     ***NODE_ENV**: Specifies the app working environment
-    ***APP_PORT**: Sets a default app port.
+    ***PORT**: Sets a default app port.
+    ***DB_URI**: Sets MongoDB connection String
+    ***NAME**: Sets the App Name
 
 ## LICENSE
 

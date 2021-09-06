@@ -4,7 +4,7 @@
     "description": "This is a typescript template for my NodeJS apps using Node, Express and Typescript",
     "main": "index.ts",
     "author": "Kolawole Ojo",
-    "license": "MIT",
+    "license": "ISC",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Kolawole99/node-ts-mongo-template.git"
