@@ -38,9 +38,11 @@ export default class Controller {
             });
             return Controller.jsonize(createdRecord) as Record<string, unknown>;
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller createRecord: ${e.message}`);
+                err = Controller.processError(`Controller createRecord: ${e.message}`);
             }
+            return err;
         }
     }
 
@@ -62,9 +64,11 @@ export default class Controller {
 
             return { ...(Controller.jsonize(fullRecords) as []) };
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller createRecords: ${e.message}`);
+                err = Controller.processError(`Controller createRecords: ${e.message}`);
             }
+            return err;
         }
     }
 
@@ -75,7 +79,7 @@ export default class Controller {
         count = false,
         skip = 0,
         limit = Number.MAX_SAFE_INTEGER,
-    ): ControllerResponse {
+    ): Promise<Array<Record<string, unknown>> | ControllerResponse> {
         try {
             if (count) {
                 const result = await this.model
@@ -92,11 +96,13 @@ export default class Controller {
                 .limit(limit)
                 .sort(sortOptions);
 
-            return Controller.jsonize(result);
+            return Controller.jsonize(result) as [];
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller readRecords: ${e.message}`);
+                err = Controller.processError(`Controller readRecords: ${e.message}`);
             }
+            return err;
         }
     }
 
@@ -113,25 +119,32 @@ export default class Controller {
 
             return Controller.jsonize({ ...result, data }) as Record<string, unknown>;
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller updateRecords: ${e.message}`);
+                err = Controller.processError(`Controller updateRecords: ${e.message}`);
             }
+            return err;
         }
     }
 
     async softDeleteRecords(conditions: Record<string, unknown>): ControllerResponse {
         try {
-            const result = await this.model.updateMany({ ...conditions }, {
-                isActive: false,
-                isDeleted: true,
-                $currentDate: { updatedOn: true },
-            } as Record<string, unknown>);
+            const result = await this.model.updateMany(
+                { ...conditions },
+                {
+                    isActive: false,
+                    isDeleted: true,
+                    $currentDate: { updatedOn: true },
+                },
+            );
 
             return Controller.jsonize(result) as Record<string, unknown>;
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller softDeleteRecords: ${e.message}`);
+                err = Controller.processError(`Controller softDeleteRecords: ${e.message}`);
             }
+            return err;
         }
     }
 
@@ -141,9 +154,11 @@ export default class Controller {
 
             return Controller.jsonize(result) as Record<string, unknown>;
         } catch (e: unknown) {
+            let err = {};
             if (e instanceof Error) {
-                return Controller.processError(`Controller hardDeleteRecords: ${e.message}`);
+                err = Controller.processError(`Controller hardDeleteRecords: ${e.message}`);
             }
+            return err;
         }
     }
 }
