@@ -30,4 +30,17 @@ export interface ControllerErrorResponse {
     error: string;
 }
 
-export type ControllerResponse = Promise<ControllerErrorResponse | unknown>;
+export type ControllerResponse = Promise<Record<string, unknown> | ControllerErrorResponse>;
+
+export interface QueryBuildQueryResponse {
+    count: boolean;
+    limit: number;
+    skip: number;
+    sortCondition: string;
+    fieldsToReturn: string;
+    seekConditions: Record<string, unknown>;
+}
+
+export interface ProcessMultipleReadResultsParams {
+    count: number;
+}
