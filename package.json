@@ -7,12 +7,12 @@
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Kolawole99/node-ts-mongo-template.git"
+        "url": "git+https://github.com/Kolawole99/node-ts-mongo.git"
     },
     "bugs": {
-        "url": "https://github.com/Kolawole99/node-ts-mongo-template/issues"
+        "url": "https://github.com/Kolawole99/node-ts-mongo/issues"
     },
-    "homepage": "https://github.com/Kolawole99/node-ts-mongo-template#readme",
+    "homepage": "https://github.com/Kolawole99/node-ts-mongo#readme",
     "devDependencies": {
         "@types/compression": "^1.7.1",
         "@types/cors": "^2.8.12",
